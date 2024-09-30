@@ -1,0 +1,115 @@
+#include "Point.h"
+#include <iostream>
+using namespace std;
+
+Point::Point(int a, int b)
+{
+	x = a;
+	y = b;
+}
+
+void Point::Init(int a, int b)
+{
+	x = a;
+	y = b;
+}
+
+void Point::Print()
+{
+	cout << x << "\t" << y << endl;
+}
+
+Point Point:: Sum(Point b) const
+{
+	Point rez;
+	rez.x = this->x + b.x;
+	rez.y = this->y + b.y;
+	return rez;
+}
+
+Point Point::operator+(Point b)
+{
+	return Point(this->x + b.x, this->y + b.y);
+}
+
+Point Point::operator+(int b)
+{
+	return Point(this->x + b, this->y + b);
+}
+
+Point Point::operator-(Point b)
+{
+	return Point(this->x - b.x, this->y - b.y);
+}
+
+int Point::operator*(int b)
+{
+	return this->x * this->y * b;
+}
+
+Point Point::operator*(Point b)
+{
+	return Point(this->x * b.x, this->y * b.y);
+}
+
+Point& Point::operator++()
+{
+	this->x++;
+	this->y++;
+	return *this;
+}
+
+Point& Point::operator--()
+{
+	this->x--;
+	this->y--;
+	return *this;
+}
+
+
+
+
+
+
+
+
+
+#include "Point.h"
+#include <iostream>
+using namespace std;
+
+template<class T>
+void PrintSum(T a, T b)
+{
+	cout << a + b;
+}
+int main()
+{
+	Point a(1, 2);
+	Point b(3, 4);
+
+	/*Point rez = a.Sum(b);
+	rez.Print();*/
+
+	Point rez = a + b;
+	rez.Print();
+	Point rez1 = a.operator+(b);
+	rez1.Print();
+	Point rez2 = a + 5;
+	rez2.Print();
+
+	Point c = a - b;
+	c.Print();
+	Point c1 = a * b;
+	c1.Print();
+	int c2 = a * 2;
+	cout << c2 << endl;
+	
+
+	++a;
+	a.Print();
+	Point rez3 = ++a + 10;
+	rez3.Print();
+	--a;
+	a.Print();
+}
